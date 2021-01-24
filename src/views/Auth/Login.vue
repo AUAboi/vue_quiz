@@ -38,13 +38,15 @@ export default {
 
 	methods: {
 		...mapActions({
+			//this gets signIn action from namespace auth
 			signIn: "auth/signIn"
 		}),
 
 		async submit() {
+			//send action signIn form credentials
 			await this.signIn(this.form);
 			//Redirects to admin
-			this.$router.replace({ name: "admin" });
+			this.$router.replace({ name: "Admin" });
 		}
 	}
 };

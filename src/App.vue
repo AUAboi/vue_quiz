@@ -10,7 +10,7 @@
 				<p>{{ user.name }}</p>
 				<a href="#" @click.prevent="signOut">Sign out</a>
 			</template>
-			<button @click="doSomething">Press</button>
+			<button @click="snackBar">Press</button>
 		</div>
 		<router-view />
 	</div>
@@ -39,7 +39,7 @@ export default {
 			snack: "snack/snack"
 		}),
 
-		doSomething() {
+		snackBar() {
 			this.snack({
 				text: "This is text",
 				delay: 2000

@@ -12,7 +12,7 @@ export default {
     user: null,
   },
 
-  //
+  //This will get authentication status and user
   getters: {
     authenticated(state) {
       return state.authenticated;
@@ -35,7 +35,9 @@ export default {
 
   actions: {
     async signIn({ dispatch }, credentials) {
+      //csrf cookie for sanctum
       await axios.get("/sanctum/csrf-cookie");
+      //login request
       await axios.post("/login", credentials);
 
       return dispatch("me");
@@ -51,6 +53,8 @@ export default {
       return axios
         .get("/api/user")
         .then((response) => {
+          //Once user signs in, set authenticated mutation to true
+          //set user to axios response data
           commit("SET_AUTHENTICATED", true);
           commit("SET_USER", response.data);
         })

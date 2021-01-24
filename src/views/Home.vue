@@ -6,7 +6,7 @@
 				<h2 class="text-5xl ml-24">Game</h2>
 			</div>
 			<div class="text-left text-5xl text-gray-700 flex flex-col">
-				<router-link class="m-3" to="/choose-category">Start Quiz</router-link>
+				<router-link class="m-3" to="/quiz-game">Start Quiz</router-link>
 				<router-link class="m-3" to="/rules">Rules</router-link>
 			</div>
 		</section>

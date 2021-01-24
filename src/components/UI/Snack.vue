@@ -16,6 +16,7 @@ import { mapGetters } from "vuex";
 export default {
 	computed: {
 		...mapGetters({
+			//"snack/snack" is namespace and module
 			snack: "snack/snack"
 		})
 	}
