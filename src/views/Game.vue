@@ -1,25 +1,36 @@
 <template>
 	<div>
-		<div class="quiz-container mt-12 mx-auto p-12 w-9/12 bg-gray-200">
+		<div
+			class="quiz-container mt-12 mx-auto p-12 w-9/12 bg-gray-200 text-white rounded-lg"
+		>
 			<div>
-				<p class="text-center text-lg">
+				<Game-Score :score="playerScore" />
+				<!-- <p v-if="questions[currentQuestion]" class="text-center text-lg">
 					Question {{ currentQuestion + 1 }}
 					{{ questions[currentQuestion].question }}
+				</p> -->
+				<p class=" mx-2 p-3">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
+					aperiam iusto aut laudantium labore adipisci.
 				</p>
 
 				<div class="grid grid-cols-2">
 					<div>
-						<Quiz-Option
+						<Game-Option
 							v-for="option in options"
 							:option="option"
 							:qid="questions[currentQuestion].id"
+							:isDisabled="!timer"
 							:key="option.id"
+							@correct="processOption(correct)"
 						/>
 					</div>
-					<Game-Timer class="m-auto" />
+					<div class="m-auto">
+						<p class="text-9xl">{{ timer }}</p>
+					</div>
 				</div>
 
-				<button @click="renderQuestion">Next</button>
+				<button class="hidden" @click="renderQuestion">Next</button>
 			</div>
 		</div>
 	</div>
@@ -28,8 +39,8 @@
 <script>
 import axios from "axios";
 
-import QuizOption from "@/components/GameOption.vue";
-import GameTimer from "@/components/GameTimer.vue";
+import GameOption from "@/components/GameOption";
+import GameScore from "@/components/GameScore";
 
 export default {
 	name: "Game",
@@ -38,12 +49,14 @@ export default {
 			questions: [],
 			options: [],
 			currentQuestion: 0,
-			currentOptions: []
+			timer: 10,
+			timeout: Function,
+			playerScore: 0
 		};
 	},
 	components: {
-		QuizOption,
-		GameTimer
+		GameOption,
+		GameScore
 	},
 	methods: {
 		gameRender() {
@@ -56,6 +69,7 @@ export default {
 				.then(res => {
 					this.questions = res.data;
 					this.getOptions(this.questions[this.currentQuestion].id);
+					this.countDown();
 				})
 				.catch(err => console.log(err));
 		},
@@ -63,12 +77,35 @@ export default {
 		getOptions(id) {
 			axios.get(`api/options/${id}`).then(res => {
 				this.options = res.data;
+				this.timer = 10;
+				this.countDown();
 			});
 		},
 
+		countDown() {
+			if (this.timer > 0) {
+				this.timeout = setTimeout(() => {
+					this.timer--;
+					clearTimeout(this.timeout);
+					this.countDown();
+				}, 1000);
+			}
+		},
+
 		renderQuestion() {
-			this.currentQuestion++;
-			this.getOptions(this.questions[this.currentQuestion].id);
+			clearTimeout(this.timeout);
+			if (this.currentQuestion < 10) {
+				this.currentQuestion++;
+				this.getOptions(this.questions[this.currentQuestion].id);
+			}
+		},
+
+		processOption(correct) {
+			this.timer = 0;
+			clearTimeout(this.timeout);
+			if (correct) {
+				this.playerScore++;
+			}
 		}
 	},
 	beforeMount() {
@@ -77,5 +114,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.quiz-container {
+	background-color: #1e606e;
+}
 </style>

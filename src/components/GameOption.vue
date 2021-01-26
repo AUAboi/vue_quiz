@@ -1,6 +1,15 @@
 <template>
-	<div class="p-3 m-2">
-		<button @click="checkOption" class="text-lg">{{ option.option }}</button>
+	<div class=" m-2 border-black border-2">
+		<button
+			:disabled="isDisabled || disabled"
+			@click="checkOption"
+			class="text-lg w-full text-left p-3"
+			:class="selected ? 'selected' : ''"
+		>
+			<!-- {{ option.option }} -->
+
+			Option A
+		</button>
 	</div>
 </template>
 
@@ -8,16 +17,31 @@
 import axios from "axios";
 export default {
 	name: "GameOption",
-	props: { option: Object, qid: Number },
+	props: {
+		option: Object,
+		qid: Number,
+		isDisabled: Boolean
+	},
+	data() {
+		return {
+			selected: false,
+			disabled: false
+		};
+	},
 	methods: {
 		checkOption() {
+			this.disabled = false;
+			this.selected = true;
 			axios.post(`/api/options/${this.qid}/${this.option.id}`).then(res => {
-				console.log(res.data);
+				this.$emit("correct", res.data);
 			});
 		}
 	}
 };
 </script>
 
-<style>
+<style scoped>
+.selected {
+	background-color: #173940;
+}
 </style>

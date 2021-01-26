@@ -54,6 +54,9 @@ export default {
 };
 </script>
 <style>
+body {
+	background: #c7d5c3;
+}
 #nav {
 	text-align: center;
 }
