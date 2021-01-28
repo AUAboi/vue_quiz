@@ -8,7 +8,7 @@
 			</template>
 			<template v-else>
 				<p>{{ user.name }}</p>
-				<a href="#" @click.prevent="signOut">Sign out</a>
+				<a @click.prevent="signOut">Sign out</a>
 			</template>
 			<button @click="snackBar">Press</button>
 		</div>
@@ -49,6 +49,10 @@ export default {
 			await this.signOutAction();
 
 			this.$router.replace({ name: "Home" });
+		},
+		showModal(score) {
+			this.score = score;
+			this.modalDisplay = true;
 		}
 	}
 };

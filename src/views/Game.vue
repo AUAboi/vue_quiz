@@ -1,17 +1,15 @@
 <template>
 	<div>
+		<Modal :show="showModal" :score="playerScore" />
+
 		<div
 			class="quiz-container mt-12 mx-auto p-12 w-9/12 bg-gray-200 text-white rounded-lg"
 		>
 			<div>
-				<Game-Score :score="playerScore" />
-				<!-- <p v-if="questions[currentQuestion]" class="text-center text-lg">
+				<Game-Score :score="playerScore" :newScore="newScore" :i="i" />
+				<p v-if="questions[currentQuestion]" class="mx-2 text-lg p-3">
 					Question {{ currentQuestion + 1 }}
 					{{ questions[currentQuestion].question }}
-				</p> -->
-				<p class=" mx-2 p-3">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-					aperiam iusto aut laudantium labore adipisci.
 				</p>
 
 				<div class="grid grid-cols-2">
@@ -20,9 +18,9 @@
 							v-for="option in options"
 							:option="option"
 							:qid="questions[currentQuestion].id"
-							:isDisabled="!timer"
+							:isDisabled="optionDisabled"
 							:key="option.id"
-							@correct="processOption(correct)"
+							@correct="processOption"
 						/>
 					</div>
 					<div class="m-auto">
@@ -30,7 +28,14 @@
 					</div>
 				</div>
 
-				<button class="hidden" @click="renderQuestion">Next</button>
+				<button
+					:disabled="disableNext"
+					class="mx-2 p-3 text-xl"
+					:class="!timer ? 'block' : 'hidden'"
+					@click="renderQuestion"
+				>
+					Next
+				</button>
 			</div>
 		</div>
 	</div>
@@ -42,6 +47,8 @@ import axios from "axios";
 import GameOption from "@/components/GameOption";
 import GameScore from "@/components/GameScore";
 
+import Modal from "@/components/UI/Modal";
+
 export default {
 	name: "Game",
 	data() {
@@ -51,12 +58,18 @@ export default {
 			currentQuestion: 0,
 			timer: 10,
 			timeout: Function,
-			playerScore: 0
+			playerScore: 0,
+			newScore: 0,
+			i: 0,
+			showModal: false,
+			disableNext: true,
+			optionDisabled: false
 		};
 	},
 	components: {
 		GameOption,
-		GameScore
+		GameScore,
+		Modal
 	},
 	methods: {
 		gameRender() {
@@ -93,18 +106,33 @@ export default {
 		},
 
 		renderQuestion() {
+			if (this.disableNext) {
+				return;
+			}
+			this.disableNext = true;
+
 			clearTimeout(this.timeout);
-			if (this.currentQuestion < 10) {
+			if (this.currentQuestion < this.questions.length - 1) {
 				this.currentQuestion++;
 				this.getOptions(this.questions[this.currentQuestion].id);
+				this.optionDisabled=false
+			} else {
+				this.showModal = true;
 			}
 		},
 
 		processOption(correct) {
+			this.optionDisabled = true;
+
+			this.disableNext = false;
 			this.timer = 0;
 			clearTimeout(this.timeout);
+			this.i++;
 			if (correct) {
 				this.playerScore++;
+				this.newScore = 1;
+			} else {
+				this.newScore = 0;
 			}
 		}
 	},

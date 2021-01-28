@@ -6,9 +6,7 @@
 			class="text-lg w-full text-left p-3"
 			:class="selected ? 'selected' : ''"
 		>
-			<!-- {{ option.option }} -->
-
-			Option A
+			{{ option.option }}
 		</button>
 	</div>
 </template>
@@ -30,10 +28,16 @@ export default {
 	},
 	methods: {
 		checkOption() {
-			this.disabled = false;
-			this.selected = true;
+			this.disabled = true;
+			if (!this.isDisabled) {
+				this.selected = true;
+			}
 			axios.post(`/api/options/${this.qid}/${this.option.id}`).then(res => {
-				this.$emit("correct", res.data);
+				if (res.data != 0 && !this.isDisabled) {
+					this.$emit("correct", true);
+				} else {
+					this.$emit("correct", false);
+				}
 			});
 		}
 	}
