@@ -8,7 +8,7 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 //Set this to process.env.VUE_APP_API_URL
-axios.defaults.baseURL = "http://localhost:8000/";
+axios.defaults.baseURL = "https://aathreads.com";
 
 store.dispatch("auth/me").then(() => {
   createApp(App)
