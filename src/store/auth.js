@@ -38,7 +38,11 @@ export default {
       //csrf cookie for sanctum
       await axios.get("/sanctum/csrf-cookie");
       //login request
-      await axios.post("/login", credentials);
+      try {
+        await axios.post("/login", credentials);
+      } catch (error) {
+        console.log(error);
+      }
 
       return dispatch("me");
     },

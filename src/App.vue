@@ -4,15 +4,20 @@
 		<div id="nav">
 			<router-link to="/">Home</router-link> |
 			<template v-if="!authenticated">
-				<router-link to="/login">Sign in</router-link> |
+				<router-link to="/login">Sign in</router-link>
 			</template>
 			<template v-else>
-				<p>{{ user.name }}</p>
-				<a @click.prevent="signOut">Sign out</a>
+				<router-link to="/admin">{{ user.name }}</router-link> |
+				<a class="cursor-pointer" @click.prevent="signOut">Sign out</a>
 			</template>
-			<button @click="snackBar">Press</button>
 		</div>
 		<router-view />
+		<footer class="fixed bottom-0">
+			&copy; Ahsan_AUA
+			<a class="text-blue-500" href="auaboi.github.io/auaahsan/dist/"
+				>Portfolio</a
+			>
+		</footer>
 	</div>
 </template>
 

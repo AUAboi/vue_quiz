@@ -17,27 +17,6 @@ export default {
 	components: {
 		QuestionForm,
 		QuestionTable
-	},
-	data() {
-		return {
-			form: {
-				question: "Hello",
-				option: [
-					{
-						name: "Hey",
-						is_correct: true
-					},
-					{
-						name: "Yes",
-						is_correct: false
-					},
-					{
-						name: "????",
-						is_correct: false
-					}
-				]
-			}
-		};
 	}
 };
 </script>

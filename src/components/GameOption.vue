@@ -3,7 +3,7 @@
 		<button
 			:disabled="isDisabled || disabled"
 			@click="checkOption"
-			class="text-lg w-full text-left p-3"
+			class="text-lg w-full text-left sm:p-3 p-2"
 			:class="selected ? 'selected' : ''"
 		>
 			{{ option.option }}

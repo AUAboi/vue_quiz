@@ -48,7 +48,7 @@
 							<div class="mt-2">
 								<p v-if="score > 5" class="text-sm text-gray-500">
 									Congrats, you got {{ score }} points! If you liked the app,
-									please share it your friends
+									check out my other projects
 								</p>
 								<p v-else class="text-sm text-gray-500">
 									Your score is {{ score }}
@@ -60,9 +60,9 @@
 				<div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 					<button
 						type="button"
-						class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+						class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
 					>
-						Share
+						<a href="auaboi.github.io/auaahsan/dist/">Portfolio</a>
 					</button>
 					<router-link
 						to="/"

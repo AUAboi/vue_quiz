@@ -41,14 +41,13 @@
 							question.question
 						}}</span>
 					</td>
-					<td class="px-16 py-2">
-						<span>A</span>
-					</td>
-					<td class="px-16 py-2">
-						<span>B</span>
-					</td>
-					<td class="px-16 py-2">
-						<span>C</span>
+					<td
+						v-for="option in question.options"
+						:key="option.id"
+						class="px-16 py-2"
+						:class="option.is_correct ? 'bg-green-200' : ''"
+					>
+						<span>{{ option.option }}</span>
 					</td>
 
 					<td class="px-16 py-2">

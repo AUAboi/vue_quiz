@@ -1,19 +1,22 @@
 <template>
 	<div>
 		<Modal :show="showModal" :score="playerScore" />
-
+		<Loader v-if="loading" />
 		<div
-			class="quiz-container mt-12 mx-auto p-12 w-9/12 bg-gray-200 text-white rounded-lg"
+			class="quiz-container mt-12 mx-auto md:p-12 p-3 w-10/12 sm:w-9/12 bg-gray-200 text-white rounded-lg"
 		>
 			<div>
 				<Game-Score :score="playerScore" :newScore="newScore" :i="i" />
-				<p v-if="questions[currentQuestion]" class="mx-2 text-lg p-3">
+				<p
+					v-if="questions[currentQuestion]"
+					class="sm:mx-2 mx-1 md:text-lg text-xl p-3"
+				>
 					Question {{ currentQuestion + 1 }}
 					{{ questions[currentQuestion].question }}
 				</p>
 
-				<div class="grid grid-cols-2">
-					<div>
+				<div class="grid md:grid-cols-2">
+					<div class="md:row-start-1">
 						<Game-Option
 							v-for="option in options"
 							:option="option"
@@ -23,8 +26,8 @@
 							@correct="processOption"
 						/>
 					</div>
-					<div class="m-auto">
-						<p class="text-9xl">{{ timer }}</p>
+					<div class="m-auto row-start-1">
+						<p class="sm:text-9xl text-6xl">{{ timer }}</p>
 					</div>
 				</div>
 
@@ -48,6 +51,7 @@ import GameOption from "@/components/GameOption";
 import GameScore from "@/components/GameScore";
 
 import Modal from "@/components/UI/Modal";
+import Loader from "@/components/UI/Loader";
 
 export default {
 	name: "Game",
@@ -63,16 +67,19 @@ export default {
 			i: 0,
 			showModal: false,
 			disableNext: true,
-			optionDisabled: false
+			optionDisabled: false,
+			loading: false
 		};
 	},
 	components: {
 		GameOption,
 		GameScore,
-		Modal
+		Modal,
+		Loader
 	},
 	methods: {
 		gameRender() {
+			this.loading = true;
 			this.getQuestions();
 		},
 
@@ -93,6 +100,7 @@ export default {
 				this.timer = 10;
 				this.countDown();
 			});
+			this.loading = false;
 		},
 
 		countDown() {
@@ -115,7 +123,7 @@ export default {
 			if (this.currentQuestion < this.questions.length - 1) {
 				this.currentQuestion++;
 				this.getOptions(this.questions[this.currentQuestion].id);
-				this.optionDisabled=false
+				this.optionDisabled = false;
 			} else {
 				this.showModal = true;
 			}

@@ -1,9 +1,7 @@
 <template>
 	<div>
-		<div>
-			<h1>Question</h1>
-		</div>
-		<form @submit.prevent="submit" class="form">
+		<h1 class="font-bold text-lg">Add Question</h1>
+		<form @submit.prevent="submit" class="form mx-auto my-3 w-6/12 text-center">
 			<input
 				type="text"
 				class="border border-black my-3"
@@ -12,12 +10,16 @@
 			/>
 			<div v-for="(op, i) in form.option" :key="i">
 				<input
+					type="checkbox"
+					class="form-checkbox mx-1"
+					v-model="op.is_correct"
+				/>
+
+				<input
 					type="text"
-					class="form-input border border-black"
+					class="form-input border border-black my-3"
 					v-model="op.name"
 				/>
-				<input type="checkbox" class="form-checkbox" v-model="op.is_correct" />
-				<p>{{ op.is_correct }}</p>
 			</div>
 			<button type="submit">Submit</button>
 		</form>
