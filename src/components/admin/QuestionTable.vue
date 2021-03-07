@@ -45,7 +45,7 @@
 						v-for="option in question.options"
 						:key="option.id"
 						class="px-16 py-2"
-						:class="option.is_correct ? 'bg-green-200' : ''"
+						:class="option.is_correct == 1 ? 'bg-green-200' : 'bg-white'"
 					>
 						<span>{{ option.option }}</span>
 					</td>

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>This is Rules Page</h1>
+		<h1>Answer questions</h1>
 	</div>
 </template>
 

@@ -29,7 +29,10 @@ import { mapActions } from "vuex";
 
 import Loader from "@/components/UI/Loader";
 
+import guest from "../../router/middleware/guest";
+
 export default {
+	middleware: [guest],
 	name: "Login",
 	components: { Loader },
 	data() {

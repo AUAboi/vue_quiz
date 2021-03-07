@@ -14,7 +14,7 @@
 		<router-view />
 		<footer class="fixed bottom-0">
 			&copy; Ahsan_AUA
-			<a class="text-blue-500" href="auaboi.github.io/auaahsan/dist/"
+			<a class="text-blue-500" href="https://auaboi.github.io/auaahsan/dist/"
 				>Portfolio</a
 			>
 		</footer>

@@ -94,7 +94,7 @@ export default {
 				.catch(err => console.log(err));
 		},
 
-		getOptions(id) {
+			getOptions(id) {
 			axios.get(`api/options/${id}`).then(res => {
 				this.options = res.data;
 				this.timer = 10;
