@@ -130,6 +130,7 @@ export default {
 		},
 
 		processOption(correct) {
+			//Checks if correct
 			this.optionDisabled = true;
 
 			this.disableNext = false;
