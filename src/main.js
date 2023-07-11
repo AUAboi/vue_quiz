@@ -10,7 +10,7 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 //Set this to process.env.VUE_APP_API_URL
 // axios.defaults.baseURL = "http://localhost:8000";
-axios.defaults.baseURL = import.meta.env.VUE_APP_API_URL
+axios.defaults.baseURL = "http://localhost:8000"
 
 store.dispatch("auth/me").then(() => {
   createApp(App)
