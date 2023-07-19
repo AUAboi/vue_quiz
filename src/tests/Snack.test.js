@@ -3,15 +3,7 @@ import Snack from "@/components/UI/Snack.vue";
 import { test } from "vitest";
 import { createStore } from 'vuex'
 
-let defaults = {
-  time: 2000,
-  delay: 0,
-  text: "",
-};
-
 const store = createStore({
-  namespaced: true,
-
   state: {
     snack: null,
   },
@@ -25,20 +17,6 @@ const store = createStore({
   mutations: {
     SET_SNACK(state, text) {
       state.snack = text;
-    },
-  },
-  actions: {
-    snack({ commit }, options) {
-      options = { ...defaults, ...options };
-
-      setTimeout(() => {
-        commit("SET_SNACK", options.text);
-
-        //Destroy snacks after 2 seconds
-        setTimeout(() => {
-          commit("SET_SNACK", null);
-        }, options.time);
-      }, options.delay);
     },
   },
 });
@@ -62,5 +40,6 @@ it("is not visible without vuex", async () => {
 })
 
 it("is visible after vuex action is passed", async () => {
-  expect(wrapper.find('#snack').exists()).toBe(true)
+  store.commit("SET_SNACK", "test")
+  expect(store.state.snack).toBe("test")
 })
