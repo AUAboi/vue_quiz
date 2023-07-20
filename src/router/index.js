@@ -13,6 +13,8 @@ import { useUserStore } from "../store/user";
 import auth from "./middleware/auth";
 //guest checks for non-authenticated user
 import guest from "./middleware/guest";
+//checks for admin user
+import isAdmin from "./middleware/isAdmin";
 
 import middlewarePipeline from "./kernel/middlewarePipeline";
 
@@ -52,7 +54,7 @@ const routes = [
     name: "Admin",
     component: Admin,
     meta: {
-      middleware: [auth],
+      middleware: [isAdmin],
     },
   },
   {
@@ -83,6 +85,7 @@ router.beforeEach((to, from, next) => {
       return middleware != undefined;
     })
     .flat();
+
 
   //if theres no middleware
   if (!middleware.length) {
