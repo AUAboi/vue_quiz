@@ -1,3 +1,62 @@
+<script setup>
+import axios from "axios";
+import { reactive } from "vue";
+import { useSnackStore } from "@/store/snack";
+
+const form = reactive({
+  question: "",
+  option: [
+    {
+      name: "",
+      is_correct: false,
+    },
+    {
+      name: "",
+      is_correct: false,
+    },
+    {
+      name: "",
+      is_correct: false,
+    },
+  ],
+});
+
+const emit = defineEmits(["fetchall"]);
+
+const snackStore = useSnackStore();
+
+const submit = () => {
+  axios
+    .post("api/questions", form)
+    .then((res) => {
+      form.question = "";
+      form.option = [
+        {
+          name: "",
+          is_correct: false,
+        },
+        {
+          name: "",
+          is_correct: false,
+        },
+        {
+          name: "",
+          is_correct: false,
+        },
+      ];
+
+      snackStore.snack({
+        text: res.data,
+        delay: 1000,
+      });
+
+      emit("fetchall");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+</script>
 <template>
   <div>
     <h1 class="font-bold text-lg">Add Question</h1>
@@ -25,70 +84,3 @@
     </form>
   </div>
 </template>
-
-<script>
-import axios from "axios";
-import { mapActions } from "vuex";
-export default {
-  name: "QuestionForm",
-  data() {
-    return {
-      form: {
-        question: "",
-        option: [
-          {
-            name: "",
-            is_correct: false,
-          },
-          {
-            name: "",
-            is_correct: false,
-          },
-          {
-            name: "",
-            is_correct: false,
-          },
-        ],
-      },
-    };
-  },
-  methods: {
-    ...mapActions({
-      snack: "snack/snack",
-    }),
-    submit() {
-      axios
-        .post("api/questions", this.form)
-        .then((res) => {
-          this.form.question = "";
-          this.form.option = [
-            {
-              name: "",
-              is_correct: false,
-            },
-            {
-              name: "",
-              is_correct: false,
-            },
-            {
-              name: "",
-              is_correct: false,
-            },
-          ];
-
-          this.snack({
-            text: res.data,
-            delay: 1000,
-          });
-
-          this.$emit("fetchall");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
-};
-</script>
-
-<style></style>

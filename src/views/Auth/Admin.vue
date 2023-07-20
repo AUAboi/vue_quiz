@@ -1,39 +1,25 @@
-<template>
-  <div>
-    <Question-Form @fetchall="getQuestions" />
-    <Question-Table :questions="questions" @fetchall="getQuestions" />
-  </div>
-</template>
-
-<script>
+<script setup>
 import QuestionForm from "@/components/admin/QuestionForm";
 import QuestionTable from "@/components/admin/QuestionTable";
-
-import auth from "../../router/middleware/auth";
 import axios from "axios";
+import { ref, onMounted } from "vue";
 
-export default {
-  name: "Admin",
-  data() {
-    return {
-      questions: [],
-    };
-  },
-  methods: {
-    getQuestions() {
-      axios.get("api/questions/show").then((response) => {
-        this.questions = response.data;
-      });
-    },
-  },
-  components: {
-    QuestionForm,
-    QuestionTable,
-  },
-  created() {
-    this.getQuestions();
-  },
+const questions = ref([]);
+
+const getQuestions = () => {
+  axios.get("api/questions/show").then((response) => {
+    questions.value = response.data;
+  });
 };
+
+onMounted(() => {
+  getQuestions();
+});
 </script>
 
-<style></style>
+<template>
+  <div>
+    <QuestionForm @fetchall="getQuestions" />
+    <QuestionTable :questions="questions" @fetchall="getQuestions" />
+  </div>
+</template>

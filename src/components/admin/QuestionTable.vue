@@ -1,3 +1,32 @@
+<script setup>
+import axios from "axios";
+import { useSnackStore } from "../../store/snack";
+
+const emit = defineEmits(["fetchall"]);
+
+const snackStore = useSnackStore();
+
+const props = defineProps({
+  questions: {
+    required: true,
+    default: () => {
+      return [];
+    },
+  },
+});
+
+const deleteEntry = async (id) => {
+  await axios.delete(`api/questions/${id}`);
+  snackStore.snack({
+    text: "Deleted Successfully",
+    delay: 500,
+  });
+  emit("fetchall");
+};
+</script>
+
+<style></style>
+
 <template>
   <div class="bg-white rounded-md shadow overflow-x-auto mx-4">
     <table class="w-full whitespace-nowrap">
@@ -60,27 +89,3 @@
     </table>
   </div>
 </template>
-
-<script>
-import axios from "axios";
-
-export default {
-  name: "QuestionTable",
-  props: {
-    questions: {
-      required: true,
-      default: () => {
-        return [];
-      },
-    },
-  },
-  methods: {
-    async deleteEntry(id) {
-      await axios.delete(`api/questions/${id}`);
-      this.$emit("fetchall");
-    },
-  },
-};
-</script>
-
-<style></style>

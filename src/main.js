@@ -15,11 +15,12 @@ const pinia = createPinia()
 
 
 
-createApp(App)
-  .use(router)
+const app = createApp(App)
   .use(pinia)
-  .mount("#app");
-
 
 const userStore = useUserStore()
-userStore.verifyLogin()
+await userStore.verifyLogin()
+
+app.use(router)
+  .mount("#app");
+

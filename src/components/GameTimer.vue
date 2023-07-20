@@ -1,34 +1,25 @@
-<template>
-	<div>
-		<p class="text-8xl">
-			{{ timer }}
-		</p>
-	</div>
-</template>
+<script setup>
+import { ref, onMounted } from "vue";
 
-<script>
-export default {
-	name: "GameTimer",
-	data() {
-		return {
-			timer: 10
-		};
-	},
-	methods: {
-		countDown() {
-			if (this.timer > 0) {
-				setTimeout(() => {
-					this.timer--;
-					this.countDown();
-				}, 1000);
-			}
-		}
-	},
-	created() {
-		this.countDown();
-	}
+const timer = ref(10);
+const countDown = () => {
+  if (timer.value > 0) {
+    setTimeout(() => {
+      timer.value--;
+      countDown();
+    }, 1000);
+  }
 };
+
+onMounted(() => {
+  countDown();
+});
 </script>
 
-<style>
-</style>
+<template>
+  <div>
+    <p class="text-8xl">
+      {{ timer }}
+    </p>
+  </div>
+</template>

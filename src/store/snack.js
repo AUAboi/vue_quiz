@@ -1,39 +1,27 @@
+import { defineStore } from "pinia";
+import { ref } from "vue";
+
 let defaults = {
   time: 2000,
   delay: 0,
   text: "",
 };
 
-export default {
-  namespaced: true,
+export const useSnackStore = defineStore('snack', () => {
+  const snackText = ref('')
 
-  state: {
-    snack: null,
-  },
+  function snack(options) {
+    options = { ...defaults, ...options };
 
-  getters: {
-    snack(state) {
-      return state.snack;
-    },
-  },
+    setTimeout(() => {
+      snackText.value = options.text
 
-  mutations: {
-    SET_SNACK(state, text) {
-      state.snack = text;
-    },
-  },
-  actions: {
-    snack({ commit }, options) {
-      options = { ...defaults, ...options };
-
+      //Destroy snacks after 2 seconds
       setTimeout(() => {
-        commit("SET_SNACK", options.text);
+        snackText.value = null
+      }, options.time);
+    }, options.delay);
+  }
 
-        //Destroy snacks after 2 seconds
-        setTimeout(() => {
-          commit("SET_SNACK", null);
-        }, options.time);
-      }, options.delay);
-    },
-  },
-};
+  return { snackText, snack }
+})

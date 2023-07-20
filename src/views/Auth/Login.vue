@@ -15,11 +15,11 @@ const userStore = useUserStore();
 const loading = ref(false);
 
 const submit = async () => {
-  //send action signIn form credentials
   loading.value = true;
   await userStore.signIn(form);
-  //Redirects to admin
+
   loading.value = false;
+
   router.replace({ name: "Admin" });
 };
 </script>

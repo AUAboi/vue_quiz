@@ -1,6 +1,7 @@
 <script setup>
 import Snack from "./components/UI/Snack";
 import { useUserStore } from "@/store/user.js";
+import router from "./router";
 
 const userStore = useUserStore();
 

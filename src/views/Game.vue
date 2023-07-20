@@ -7,6 +7,7 @@ import GameScore from "@/components/GameScore";
 import Modal from "@/components/UI/Modal";
 import Loader from "@/components/UI/Loader";
 import { onMounted, ref } from "vue";
+import { useSnackStore } from "../store/snack";
 
 const questions = ref([]);
 const options = ref([]);
@@ -19,6 +20,9 @@ const showModal = ref(false);
 const disableNext = ref(true);
 const optionDisabled = ref(false);
 const loading = ref(false);
+
+const snackStore = useSnackStore();
+
 let timeout;
 
 const gameRender = () => {
@@ -31,6 +35,13 @@ const getQuestions = () => {
     .get("/api/questions")
     .then((res) => {
       questions.value = res.data;
+      if (!questions.value.length) {
+        snackStore.snack({
+          text: "No question found",
+          delay: 1000,
+        });
+        return;
+      }
       getOptions(questions.value[currentQuestion.value].id);
       countDown();
     })
@@ -100,6 +111,7 @@ onMounted(() => {
   gameRender();
 });
 </script>
+
 <template>
   <div>
     <Modal :show="showModal" :score="playerScore" />

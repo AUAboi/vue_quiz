@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', () => {
       console.log(error);
     }
 
-    verifyLogin()
+    await verifyLogin()
   }
 
   const signOut = async () => {
@@ -25,7 +25,7 @@ export const useUserStore = defineStore('user', () => {
     verifyLogin()
   }
 
-  const verifyLogin = () => {
+  const verifyLogin = async () => {
     return axios
       .get("/api/user")
       .then((response) => {
