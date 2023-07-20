@@ -37,6 +37,7 @@ const routes = [
     path: "/quiz-game/",
     name: "Game",
     component: Game,
+
   },
   {
     path: "/login",
@@ -75,7 +76,7 @@ router.beforeEach((to, from, next) => {
 
   let middleware = to.matched
     .map((matched) => {
-      return matched.components.default.middleware;
+      return matched.meta.middleware;
     })
     .filter((middleware) => {
       return middleware != undefined;

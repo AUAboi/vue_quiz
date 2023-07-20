@@ -13,7 +13,6 @@ import auth from "../../router/middleware/auth";
 import axios from "axios";
 
 export default {
-  middleware: [auth],
   name: "Admin",
   data() {
     return {
