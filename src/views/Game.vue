@@ -68,6 +68,14 @@ const renderQuestion = () => {
     getOptions(questions.value[currentQuestion.value].id);
     optionDisabled.value = false;
   } else {
+    axios
+      .post("api/score/store", { score: playerScore.value })
+      .then((res) => {
+        console.log("Stored successfully");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     showModal.value = true;
   }
 };

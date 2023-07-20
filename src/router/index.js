@@ -6,7 +6,7 @@ import Login from "../views/Auth/Login.vue";
 import Admin from "../views/Auth/Admin.vue";
 // import NotFound from "../views/NotFound.vue";
 
-import store from "../store";
+import { useUserStore } from "../store/user";
 
 //These are middlewares
 //auth checks for authenticated user
@@ -69,6 +69,7 @@ const router = createRouter({
 
 //Midlleware for components
 router.beforeEach((to, from, next) => {
+  const store = useUserStore()
   if (to.name == "NotFound") {
     return next();
   }

@@ -1,8 +1,5 @@
 export default function auth({ store, next }) {
-  console.log("nah eh");
-
-  if (!store.getters["auth/authenticated"]) {
-
+  if (!store.authenticated) {
     return next({
       name: "Login",
     });

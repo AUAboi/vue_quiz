@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Vue transition styling */
 .snack-enter-active,
 .snack-leave-active {
   @apply transition duration-500 ease-in-out;
