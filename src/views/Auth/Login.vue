@@ -1,8 +1,9 @@
 <script setup>
-import { mapActions } from "vuex";
 import { ref, reactive } from "vue";
 import Loader from "@/components/UI/Loader";
 import { useUserStore } from "@/store/user.js";
+import { useSnackStore } from "@/store/snack.js";
+
 import router from "../../router";
 
 const form = reactive({
@@ -11,6 +12,7 @@ const form = reactive({
 });
 
 const userStore = useUserStore();
+const snackStore = useSnackStore();
 
 const loading = ref(false);
 
@@ -19,6 +21,11 @@ const submit = async () => {
   await userStore.signIn(form);
 
   loading.value = false;
+
+  if (!userStore.authenticated) {
+    snackStore.snack({ text: "Authentication failed" });
+    return;
+  }
 
   router.replace({ name: "Admin" });
 };
@@ -38,7 +45,7 @@ const submit = async () => {
         </p>
       </div>
       <Loader v-if="loading" />
-      <div
+      <form
         class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end"
       >
         <div class="relative flex-grow w-full">
@@ -49,7 +56,7 @@ const submit = async () => {
             type="text"
             id="email"
             name="email"
-			v-model="form.email"
+            v-model="form.email"
             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 sel focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
           />
         </div>
@@ -72,35 +79,7 @@ const submit = async () => {
         >
           Button
         </button>
-      </div>
+      </form>
     </div>
   </div>
-  <!-- <div>
-    <Loader v-if="loading" />
-    <form action="#" @submit.prevent="submit">
-      <div>
-        <label for="email">Email address</label>
-        <input type="text" name="email" id="email" v-model="form.email" />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          v-model="form.password"
-        />
-      </div>
-      <div>
-        <button type="submit">Sign in</button>
-      </div>
-    </form>
-  </div> -->
 </template>
-
-<style scoped>
-/* input {
-  border: 1px black solid;
-  margin: 0.3rem 1rem;
-} */
-</style>
