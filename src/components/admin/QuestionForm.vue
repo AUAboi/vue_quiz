@@ -64,7 +64,7 @@ const submit = () => {
     <form @submit.prevent="submit" class="form mx-auto my-3 w-6/12 text-center">
       <input
         type="text"
-        class="border border-black my-3"
+        class="border border-black my-3 w-1/2"
         placeholder="Question"
         v-model="form.question"
       />
@@ -85,3 +85,10 @@ const submit = () => {
     </form>
   </div>
 </template>
+
+
+<style scoped>
+input {
+  padding: 10px;
+}
+</style>
