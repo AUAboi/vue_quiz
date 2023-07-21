@@ -25,16 +25,16 @@ const signOut = async () => {
     </div>
     <router-view />
     <footer class="fixed bottom-0">
-      &copy; Ahsan_AUA
-      <a class="text-blue-500" href="https://auaboi.github.io/auaahsan/dist/"
-        >Portfolio</a
+      &copy; Awais Faisal & Umar Nadeem
+      <p class="text-blue-500"
+        >PF_Project</p
       >
     </footer>
   </div>
 </template>
 <style>
 body {
-  background: #c7d5c3;
+  background: #f5f5f5;
 }
 #nav {
   text-align: center;
