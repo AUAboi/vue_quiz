@@ -1,6 +1,6 @@
 <template>
-  <div class="popup">
-    <img src="../../assets/Vanilla-1s-280px.png" />
+  <div class="popup border-2 bg-black text-white p-3 rounded-md">
+    <h1 class="font-mono text-4xl">Loading...</h1>
   </div>
 </template>
 

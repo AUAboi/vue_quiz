@@ -59,7 +59,8 @@ const submit = () => {
 </script>
 <template>
   <div>
-    <h1 class="font-bold text-lg">Add Question</h1>
+    <h1 class="font-bold text-lg text-center mt-5">Add Question</h1>
+    <p class="text-center">Check the correct options. A question can have more than one correct option</p>
     <form @submit.prevent="submit" class="form mx-auto my-3 w-6/12 text-center">
       <input
         type="text"
@@ -80,7 +81,7 @@ const submit = () => {
           v-model="op.name"
         />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" class="text-white bg-sky-900 border-0 py-2 px-8 focus:outline-none">Submit</button>
     </form>
   </div>
 </template>

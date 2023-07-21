@@ -74,7 +74,7 @@ const renderQuestion = () => {
   disableNext.value = true;
 
   clearTimeout(timeout);
-  if (currentQuestion.value < questions.length - 1) {
+  if (currentQuestion.value < questions.value.length - 1) {
     currentQuestion.value++;
     getOptions(questions.value[currentQuestion.value].id);
     optionDisabled.value = false;
@@ -126,7 +126,7 @@ onMounted(() => {
           v-if="questions[currentQuestion]"
           class="sm:mx-2 mx-1 md:text-lg text-xl p-3"
         >
-          Question {{ currentQuestion + 1 }}
+         <span class="font-bold text-2xl"> Question no. {{ currentQuestion + 1 }}: </span>
           {{ questions[currentQuestion].question }}
         </p>
 
