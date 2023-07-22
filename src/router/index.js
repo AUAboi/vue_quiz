@@ -3,7 +3,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Game from "../views/Game.vue";
 import Login from "../views/Auth/Login.vue";
+import Register from "../views/Auth/Register.vue";
 import Admin from "../views/Auth/Admin.vue";
+import Profile from "../views/Profile.vue";
 // import NotFound from "../views/NotFound.vue";
 
 import { useUserStore } from "../store/user";
@@ -45,6 +47,22 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      middleware: [guest],
+    },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+    meta: {
+      middleware: [auth]
+    }
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
     meta: {
       middleware: [guest],
     },

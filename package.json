@@ -9,6 +9,7 @@
     "test": "vitest --dom"
   },
   "dependencies": {
+    "@vueuse/core": "^10.2.1",
     "axios": "^0.21.1",
     "pinia": "^2.1.4",
     "vue": "^3.3.4",
