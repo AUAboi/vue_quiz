@@ -8,16 +8,26 @@ export const useUserStore = defineStore('user', () => {
 
   const signIn = async (credentials) => {
 
-    await axios.get("/sanctum/csrf-cookie");
-
     try {
-      await axios.post("/login", credentials);
+      await axios.post("/api/login", credentials);
 
     } catch (error) {
       console.log(error);
     }
 
     await verifyLogin()
+  }
+
+  const signUp = async (credentials) => {
+    await axios.get("/sanctum/csrf-cookie");
+
+    try {
+      await axios.post("/api/register", credentials);
+
+    } catch (error) {
+      console.log(error);
+    }
+    await signIn(credentials)
   }
 
   const signOut = async () => {
@@ -38,5 +48,5 @@ export const useUserStore = defineStore('user', () => {
       });
   }
 
-  return { authenticated, user, signIn, signOut, verifyLogin }
+  return { authenticated, user, signIn, signUp, signOut, verifyLogin }
 })

@@ -8,7 +8,9 @@ import router from "../../router";
 
 const form = reactive({
   name: "",
+  email: "",
   password: "",
+  password_confirmation: "",
 });
 
 const userStore = useUserStore();
@@ -18,16 +20,18 @@ const loading = ref(false);
 
 const submit = async () => {
   loading.value = true;
-  await userStore.signIn(form);
+  await userStore.signUp(form);
 
   loading.value = false;
 
   if (!userStore.authenticated) {
-    snackStore.snack({ text: "Authentication failed" });
+    snackStore.snack({ text: "Authentication failed. Try logging in again" });
+    router.replace({ name: "Register" });
+
     return;
   }
 
-  router.replace({ name: "Admin" });
+  router.replace({ name: "Home" });
 };
 </script>
 
@@ -38,10 +42,10 @@ const submit = async () => {
         <h1
           class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"
         >
-          Login
+          Register
         </h1>
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-          Login user or admin using your given email and password
+          Register with a username and password
         </p>
       </div>
       <Loader v-if="loading" />
@@ -49,9 +53,7 @@ const submit = async () => {
         class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end"
       >
         <div class="relative flex-grow w-full">
-          <label for="name" class="leading-7 text-sm text-gray-600"
-            >Username</label
-          >
+          <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
           <input
             type="text"
             id="name"
@@ -60,6 +62,7 @@ const submit = async () => {
             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 sel focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
           />
         </div>
+
         <div class="relative flex-grow w-full">
           <label for="password" class="leading-7 text-sm text-gray-600"
             >Password</label
@@ -69,6 +72,18 @@ const submit = async () => {
             id="password"
             name="password"
             v-model="form.password"
+            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 sel focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+          />
+        </div>
+        <div class="relative flex-grow w-full">
+          <label for="password" class="leading-7 text-sm text-gray-600"
+            >Password confirm</label
+          >
+          <input
+            type="password"
+            id="password-confirm"
+            name="password_confirmation"
+            v-model="form.password_confirmation"
             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 sel focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
           />
         </div>
