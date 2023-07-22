@@ -19,16 +19,20 @@ const signOut = async () => {
         <router-link to="/login">Sign in</router-link>
       </template>
       <template v-else>
-        <router-link to="/admin">{{ userStore.user.name }}</router-link> |
+        <router-link v-if="userStore.user.is_admin" to="/admin">{{
+          userStore.user.name
+        }}</router-link>
+        <router-link v-else to="/profile">{{
+          userStore.user.name
+        }}</router-link>
+        |
         <a class="cursor-pointer" @click.prevent="signOut">Sign out</a>
       </template>
     </div>
     <router-view />
     <footer class="fixed bottom-0">
       &copy; Awais Faisal & Umar Nadeem
-      <p class="text-blue-500"
-        >PF_Project</p
-      >
+      <p class="text-blue-500">PF_Project</p>
     </footer>
   </div>
 </template>

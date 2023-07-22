@@ -3,6 +3,7 @@ import QuestionForm from "@/components/admin/QuestionForm";
 import QuestionTable from "@/components/admin/QuestionTable";
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import ScoreHistory from "../../components/ScoreHistory.vue";
 
 const questions = ref([]);
 
@@ -21,5 +22,10 @@ onMounted(() => {
   <div>
     <QuestionForm @fetchall="getQuestions" />
     <QuestionTable :questions="questions" @fetchall="getQuestions" />
+    <div class="mt-16">
+      <h2 class="font-bold text-center text-4xl">Score History</h2>
+
+      <ScoreHistory />
+    </div>
   </div>
 </template>

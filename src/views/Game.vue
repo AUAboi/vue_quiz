@@ -121,18 +121,20 @@ onMounted(() => {
       class="quiz-container mt-12 mx-auto md:p-12 p-3 w-10/12 sm:w-9/12 bg-gray-200 text-white rounded-lg"
     >
       <div>
-        <Game-Score :score="playerScore" :newScore="newScore" :i="i" />
+        <GameScore :score="playerScore" :newScore="newScore" :i="i" />
         <p
           v-if="questions[currentQuestion]"
           class="sm:mx-2 mx-1 md:text-lg text-xl p-3"
         >
-         <span class="font-bold text-2xl"> Question no. {{ currentQuestion + 1 }}: </span>
+          <span class="font-bold text-2xl">
+            Question no. {{ currentQuestion + 1 }}:
+          </span>
           {{ questions[currentQuestion].question }}
         </p>
 
         <div class="grid md:grid-cols-2">
           <div class="md:row-start-1">
-            <Game-Option
+            <GameOption
               v-for="option in options"
               :option="option"
               :qid="questions[currentQuestion].id"
