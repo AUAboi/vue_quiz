@@ -9,10 +9,12 @@ import Loader from "@/components/UI/Loader";
 import { onMounted, ref } from "vue";
 import { useSnackStore } from "../store/snack";
 
+const GAME_TIMER = 20;
+
 const questions = ref([]);
 const options = ref([]);
 const currentQuestion = ref(0);
-const timer = ref(10);
+const timer = ref(GAME_TIMER);
 const playerScore = ref(0);
 const newScore = ref(0);
 const i = ref(0);
@@ -51,7 +53,7 @@ const getQuestions = () => {
 const getOptions = (id) => {
   axios.get(`api/options/${id}`).then((res) => {
     options.value = res.data;
-    timer.value = 10;
+    timer.value = GAME_TIMER;
     countDown();
   });
   loading.value = false;
@@ -161,6 +163,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -25,9 +25,8 @@ export const useUserStore = defineStore('user', () => {
       await axios.post("/api/register", credentials);
 
     } catch (error) {
-      console.log(error);
+      throw error
     }
-    await signIn(credentials)
   }
 
   const signOut = async () => {

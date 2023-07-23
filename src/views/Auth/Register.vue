@@ -20,9 +20,19 @@ const loading = ref(false);
 
 const submit = async () => {
   loading.value = true;
-  await userStore.signUp(form);
+
+  try {
+    await userStore.signUp(form);
+  } catch (error) {
+    if (error.response.data.errors) {
+      snackStore.snack({ text: error.response.data.message });
+    }
+    loading.value = false;
+    return;
+  }
 
   loading.value = false;
+  await userStore.signIn(form);
 
   if (!userStore.authenticated) {
     snackStore.snack({ text: "Authentication failed. Try logging in again" });
