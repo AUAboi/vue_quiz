@@ -29,7 +29,7 @@ const checkOption = () => {
 </script>
 
 <template>
-  <div class="m-2 border-black border-2">
+  <div class="m-2 border-white border-2">
     <button
       :disabled="isDisabled || disabled"
       @click="checkOption"

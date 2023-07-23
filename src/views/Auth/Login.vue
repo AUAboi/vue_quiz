@@ -43,6 +43,7 @@ const submit = async () => {
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
           Login user or admin using your given email and password
         </p>
+        <p>or <router-link to="/register" class="text-blue-500 underline">Sign up </router-link>if you dont already have an account</p>
       </div>
       <Loader v-if="loading" />
       <form
@@ -77,7 +78,7 @@ const submit = async () => {
           class="text-white bg-sky-900 border-0 py-2 px-8 focus:outline-none"
           @click.prevent="submit"
         >
-          Button
+          Login
         </button>
       </form>
     </div>

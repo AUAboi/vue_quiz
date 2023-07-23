@@ -119,7 +119,7 @@ const removeField = (i) => {
         </div>
       </div>
       <div class="my-4">
-        <button v-if="form.options.length < 5" @click.prevent="addField">
+        <button v-if="form.options.length < 5" @click.prevent="addField" class="border-2 border-sky-900 p-3 text-sky-900">
           Add another option
         </button>
       </div>

@@ -1,6 +1,6 @@
 <template>
-  <div class="popup border-2 bg-black text-white p-3 rounded-md">
-    <h1 class="font-mono text-4xl">Loading...</h1>
+  <div class="popup z-50 text-white p-3 rounded-md">
+    <img src="../../assets/Blocks-1s-200px.apng" alt="loading" srcset="">
   </div>
 </template>
 
