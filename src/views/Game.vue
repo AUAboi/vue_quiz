@@ -9,7 +9,7 @@ import Loader from "@/components/UI/Loader";
 import { onMounted, ref } from "vue";
 import { useSnackStore } from "../store/snack";
 
-const GAME_TIMER = 20;
+const GAME_TIMER = 4;
 
 const questions = ref([]);
 const options = ref([]);
@@ -66,6 +66,9 @@ const countDown = () => {
       clearTimeout(timeout);
       countDown();
     }, 1000);
+  } else {
+    disableNext.value = false;
+    optionDisabled.value = true;
   }
 };
 
