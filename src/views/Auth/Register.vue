@@ -92,7 +92,7 @@ const submit = async () => {
           class="text-white bg-sky-900 border-0 py-2 px-8 focus:outline-none"
           @click.prevent="submit"
         >
-          Button
+          Register
         </button>
       </form>
     </div>

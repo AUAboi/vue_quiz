@@ -37,14 +37,9 @@ const deleteEntry = async (id) => {
         <th class="px-16 py-2">
           <span class="text-gray-300">Question</span>
         </th>
-        <th class="px-16 py-2">
-          <span class="text-gray-300">Option</span>
-        </th>
-        <th class="px-16 py-2">
-          <span class="text-gray-300">Option</span>
-        </th>
+    
 
-        <th class="px-16 py-2">
+        <th colspan="5" class="px-16 py-2">
           <span class="text-gray-300">Option</span>
         </th>
 
@@ -60,18 +55,22 @@ const deleteEntry = async (id) => {
         <td class="px-16 py-2 flex flex-row items-center">
           <span class="text-center ml-2 font-semibold">{{ question.id }}</span>
         </td>
-        <td>
+        <td
+        class="px-16 py-2"
+        
+        >
           <span class="text-center ml-2 font-semibold">{{
             question.question
           }}</span>
         </td>
-        <td
-          v-for="option in question.options"
-          :key="option.id"
+        <td 
+          v-for="i in 5"
+          :key="i"
           class="px-16 py-2"
-          :class="option.is_correct == 1 ? 'bg-green-200' : 'bg-white'"
-        >
-          <span>{{ option.option }}</span>
+          :class="question.options[i-1]?.is_correct == 1 ? 'bg-green-200' : 'bg-white'"
+          >
+          <span>{{ question.options[i-1]?.option }}</span>
+
         </td>
 
         <td class="px-16 py-2">

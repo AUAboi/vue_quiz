@@ -118,7 +118,7 @@ onMounted(() => {
     <Loader v-if="loading" />
     <div
       v-if="questions.length"
-      class="quiz-container mt-12 mx-auto md:p-12 p-3 w-10/12 sm:w-9/12 bg-gray-200 text-white rounded-lg"
+      class="quiz-container mt-12 mx-auto md:p-12 p-3 w-10/12 sm:w-9/12 bg-sky-900 text-white rounded-lg"
     >
       <div>
         <GameScore :score="playerScore" :newScore="newScore" :i="i" />
@@ -162,7 +162,5 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.quiz-container {
-  background-color: #1e606e;
-}
+
 </style>

@@ -92,7 +92,7 @@ const removeField = (i) => {
     <form @submit.prevent="submit" class="form mx-auto my-3 w-6/12 text-center">
       <input
         type="text"
-        class="border border-black my-3"
+        class="border border-black my-3 w-1/2"
         placeholder="Question"
         v-model="form.question"
       />
@@ -119,7 +119,7 @@ const removeField = (i) => {
         </div>
       </div>
       <div class="my-4">
-        <button v-if="form.options.length < 5" @click.prevent="addField">
+        <button v-if="form.options.length < 5" @click.prevent="addField" class="border-2 border-sky-900 p-3 text-sky-900">
           Add another option
         </button>
       </div>
@@ -132,3 +132,10 @@ const removeField = (i) => {
     </form>
   </div>
 </template>
+
+
+<style scoped>
+input {
+  padding: 10px;
+}
+</style>
