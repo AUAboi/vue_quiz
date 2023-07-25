@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev:network": "vite --host",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
