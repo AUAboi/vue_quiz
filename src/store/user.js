@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', () => {
     await axios.get("/sanctum/csrf-cookie");
 
     try {
-      await axios.post("/login", credentials);
+      await axios.post("/api/login", credentials);
 
     } catch (error) {
       console.log(error);
