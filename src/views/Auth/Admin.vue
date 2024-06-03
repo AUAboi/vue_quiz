@@ -20,6 +20,12 @@ onMounted(() => {
 
 <template>
   <div>
+    <h3 class="text-center my-10 text-2xl">
+      Teacher Portal
+    </h3>
+
+
+    <router-link class="text-center underline block text-blue-500" to="/users">Manage Users</router-link>
     <QuestionForm @fetchall="getQuestions" />
     <QuestionTable :questions="questions" @fetchall="getQuestions" />
     <div class="mt-16">

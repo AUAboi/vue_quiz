@@ -6,6 +6,7 @@ import Login from "../views/Auth/Login.vue";
 import Register from "../views/Auth/Register.vue";
 import Admin from "../views/Auth/Admin.vue";
 import Profile from "../views/Profile.vue";
+import Users from "../views/Auth/Users.vue";
 // import NotFound from "../views/NotFound.vue";
 
 import { useUserStore } from "../store/user";
@@ -41,7 +42,6 @@ const routes = [
     path: "/quiz-game/",
     name: "Game",
     component: Game,
-
   },
   {
     path: "/login",
@@ -56,8 +56,8 @@ const routes = [
     name: "Profile",
     component: Profile,
     meta: {
-      middleware: [auth]
-    }
+      middleware: [auth],
+    },
   },
   {
     path: "/register",
@@ -76,6 +76,14 @@ const routes = [
     },
   },
   {
+    path: "/users",
+    name: "Users",
+    component: Users,
+    meta: {
+      middleware: [isAdmin],
+    },
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () => import("../views/NotFound.vue"),
@@ -89,7 +97,7 @@ const router = createRouter({
 
 //Midlleware for components
 router.beforeEach((to, from, next) => {
-  const store = useUserStore()
+  const store = useUserStore();
   if (to.name == "NotFound") {
     return next();
   }
@@ -103,7 +111,6 @@ router.beforeEach((to, from, next) => {
       return middleware != undefined;
     })
     .flat();
-
 
   //if theres no middleware
   if (!middleware.length) {

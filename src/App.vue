@@ -31,8 +31,7 @@ const signOut = async () => {
     </div>
     <router-view />
     <footer class="fixed bottom-0">
-      &copy; Awais Faisal & Umar Nadeem 
-      <span class="text-blue-500"> PF_Project</span>
+      <span class="text-blue-500"> FYP_Project</span>
     </footer>
   </div>
 </template>
@@ -40,6 +39,7 @@ const signOut = async () => {
 body {
   background: #f5f5f5;
 }
+
 #nav {
   text-align: center;
 }
